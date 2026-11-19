@@ -7,11 +7,11 @@
   <link rel="stylesheet" href="theme.css">
 </head>
 
-<body class="theme-oor">
+<body class="theme-oor-dark" style="background-color:#0f1117; color:#f1f3f9;">
 
   <!-- ===== header：網站的招牌 ===== -->
   <header>
-    <img src="images/images.jpg">
+    <img src="images/images.jpg" alt="ONE OK ROCK 主視覺圖片">
     <div>
       <h1>入坑吧！<br>ONE OK ROCK 搖滾宇宙</h1>
       <p>從 Live House 唱進世界舞台的四人樂團，用<strong>一場聽覺震撼</strong>告訴你：這個坑，聽過就回不來了。</p>
@@ -24,7 +24,8 @@
   <nav>
     <ul>
       <li><a href="#why">為什麼要入坑</a></li>
-      <li><a href="#rank">私房排行榜</a></li>
+      <li><a href="#rank">我心中的排行榜</a></li>
+      <li><a href="#mood">心情點歌機</a></li>
       <li><a href="#route">新手路線</a></li>
       <li><a href="#guestbook">留言板</a></li>
     </ul>
@@ -50,42 +51,56 @@
       </article>
     </section>
 
-    <!-- ===== 區塊 2：排行榜（表格） ===== -->
+    <!-- ===== 區塊 2：排行榜（表格，無評分欄） ===== -->
     <section id="rank">
       <h2>🏆 我心中的排行榜</h2>
       <table>
-        <caption>個人主觀評分，滿分 5 顆星</caption>
+        <caption>依個人喜好與聆聽情境排序</caption>
         <tr>
           <th>名次</th>
           <th>歌曲</th>
           <th>適合情境</th>
-          
         </tr>
         <tr>
           <td>🥇</td>
           <td>We are</td>
-          <td>時需要衝勁與自信的時候，代表曲之一</td>
-          
+          <td>需要衝勁與自信的時候，代表曲之一</td>
         </tr>
         <tr>
           <td>🥈</td>
           <td>Delusion:All</td>
           <td>感到孤獨不被理解時</td>
-          
         </tr>
         <tr>
           <td>🥉</td>
           <td>Vandalize</td>
           <td>時髦輕快、放鬆時聽</td>
-          
         </tr>
         <tr>
           <td>4</td>
           <td>Stand Out Fit In</td>
           <td>通勤路上、思考自我定位</td>
-          
         </tr>
       </table>
+    </section>
+
+    <!-- ===== 新增區塊：心情點歌機（互動分項） ===== -->
+    <section id="mood">
+      <h2>🎧 心情點歌機（互動推薦）</h2>
+      <p>點選你現在的心情狀態，幫你配一首最適合的 ONE OK ROCK 代表曲：</p>
+
+      <div class="mood-btn-group">
+        <button type="button" class="mood-btn is-active" data-mood="burn">🔥 想要熱血提神</button>
+        <button type="button" class="mood-btn" data-mood="alone">🌧️ 感到迷惘孤獨</button>
+        <button type="button" class="mood-btn" data-mood="chill">🌃 深夜放鬆兜風</button>
+        <button type="button" class="mood-btn" data-mood="self">⚡ 想堅持做自己</button>
+      </div>
+
+      <article class="mood-card" id="moodResult">
+        <h3 id="moodSongTitle">推薦曲目：〈We are〉</h3>
+        <p id="moodSongDesc">副歌的大合唱感與歌詞張力非常強大，適合在低潮或需要勇氣跨出下一步的時候大聲播放！</p>
+        <p class="mood-lyric" id="moodSongLyric">「We are, we are, the colors in the dark.」</p>
+      </article>
     </section>
 
     <!-- ===== 區塊 3：新手路線（沒順序 → 用 ul） ===== -->
@@ -138,7 +153,7 @@
 
       <div id="commentList">
         <div class="comment-item">
-      
+          <strong>10969 聽眾</strong>（已入坑 🎸 ・ 熱血搖滾派）：〈We are〉副歌一出來真的很有力量！
         </div>
       </div>
     </section>
@@ -162,10 +177,11 @@
   </footer>
 
   <script>
+    // 1. 封面隨機抽歌
     const songs = [
-      "〈The Beginning〉—— 搖滾爆發力十足，入坑首選！",
-      "〈Wherever you are〉—— 溫柔深情，越聽越耐聽的代表作。",
-      "〈完全感覺Dreamer〉—— 節奏爽快，充滿自信與衝勁。",
+      "〈We are〉—— 需要衝勁與自信時的代表曲之一！",
+      "〈Delusion:All〉—— 情緒張力十足，適合感到孤獨或想宣洩時聽。",
+      "〈Vandalize〉—— 時髦輕快，放鬆或轉換心情時很對味。",
       "〈Stand Out Fit In〉—— 律動感強，唱出自我與合群的拉鋸。"
     ];
     const pickBtn = document.getElementById("pickSongBtn");
@@ -176,6 +192,47 @@
       pickResult.hidden = false;
     });
 
+    // 2. 新增功能：心情點歌機切換
+    const moodData = {
+      burn: {
+        title: "推薦曲目：〈We are〉",
+        desc: "副歌的大合唱感與歌詞張力非常強大，適合在低潮或需要勇氣跨出下一步的時候大聲播放！",
+        lyric: "「We are, we are, the colors in the dark.」"
+      },
+      alone: {
+        title: "推薦曲目：〈Delusion:All〉",
+        desc: "節奏緊湊且情緒爆發力十足，把不被理解的壓抑與掙扎唱得淋漓盡致，聽完非常痛快。",
+        lyric: "「Tell me what you're waiting for, break out of the illusion.」"
+      },
+      chill: {
+        title: "推薦曲目：〈Vandalize〉",
+        desc: "兼具速度感與時髦搖滾律動，晚上戴著耳機散步或搭車回家時聽特別有氛圍。",
+        lyric: "「Vandalize my heart, leave a mark in the dark.」"
+      },
+      self: {
+        title: "推薦曲目：〈Stand Out Fit In〉",
+        desc: "獻給不想盲從、在「合群」與「做自己」之間拉扯的你，旋律洗腦又有態度。",
+        lyric: "「Stand out fit in, I am who I am.」"
+      }
+    };
+
+    const moodBtns = document.querySelectorAll(".mood-btn");
+    const moodSongTitle = document.getElementById("moodSongTitle");
+    const moodSongDesc = document.getElementById("moodSongDesc");
+    const moodSongLyric = document.getElementById("moodSongLyric");
+
+    moodBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        moodBtns.forEach((b) => b.classList.remove("is-active"));
+        btn.classList.add("is-active");
+        const info = moodData[btn.dataset.mood];
+        moodSongTitle.textContent = info.title;
+        moodSongDesc.textContent = info.desc;
+        moodSongLyric.textContent = info.lyric;
+      });
+    });
+
+    // 3. 留言表單即時新增
     const form = document.getElementById("guestbookForm");
     const commentList = document.getElementById("commentList");
     form.addEventListener("submit", (e) => {
