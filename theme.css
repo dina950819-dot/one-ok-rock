@@ -1,7 +1,13 @@
-body.theme-milktea { --bg: #fbf3e8; --card: #fffaf3; --ink: #3b2418; --soft: #8a6a55; --main: #c0703b; --pop: #ff6b6b; --line: #ead8c2; }
-body.theme-matcha  { --bg: #eef3e6; --card: #fbfdf7; --ink: #1f2e1a; --soft: #5f735a; --main: #4f8a3a; --pop: #e8a33d; --line: #d3e0c6; }
-body.theme-taro    { --bg: #f2ecf8; --card: #fcfaff; --ink: #2c1f3d; --soft: #6e5f84; --main: #8a5cc4; --pop: #ff8fb1; --line: #e0d4ef; }
-body.theme-oor     { --bg: #f8f1ed; --card: #fffdfb; --ink: #251b18; --soft: #6e5a54; --main: #d94336; --pop: #f59e0b; --line: #e8d8d0; }
+/* =========================================================
+   theme.css — 延續老師範例版面結構，換成黑暗搖滾系配色（theme-oor-dark）
+   ========================================================= */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Bricolage+Grotesque:opsz,wght@12..96,800&display=swap");
+
+/* 保留老師原有主題 + 新增黑暗系 theme-oor-dark */
+body.theme-milktea  { --bg: #fbf3e8; --card: #fffaf3; --ink: #3b2418; --soft: #8a6a55; --main: #c0703b; --pop: #ff6b6b; --line: #ead8c2; --nav: #3b2418; --nav-ink: #fffaf3; --input: #ffffff; }
+body.theme-matcha   { --bg: #eef3e6; --card: #fbfdf7; --ink: #1f2e1a; --soft: #5f735a; --main: #4f8a3a; --pop: #e8a33d; --line: #d3e0c6; --nav: #1f2e1a; --nav-ink: #fbfdf7; --input: #ffffff; }
+body.theme-taro     { --bg: #f2ecf8; --card: #fcfaff; --ink: #2c1f3d; --soft: #6e5f84; --main: #8a5cc4; --pop: #ff8fb1; --line: #e0d4ef; --nav: #2c1f3d; --nav-ink: #fcfaff; --input: #ffffff; }
+body.theme-oor-dark { --bg: #0f1117; --card: #181b24; --ink: #f1f3f9; --soft: #9aa2b6; --main: #e5484d; --pop: #ff6b6b; --line: #2a2f3d; --nav: #090a0e; --nav-ink: #f1f3f9; --input: #11141c; }
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -9,8 +15,8 @@ body {
   margin: 0; background: var(--bg); color: var(--ink);
   font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif; line-height: 1.85; font-size: 17px;
 }
-a { color: var(--main); font-weight: 700; text-underline-offset: 4px; }
-img { max-width: 100%; }
+a { color: var(--pop); font-weight: 700; text-underline-offset: 4px; }
+img { max-width: 100%; border-radius: 14px; }
 
 /* ---------- header：大封面 ---------- */
 header {
@@ -18,15 +24,15 @@ header {
   padding: 56px 20px 40px; text-align: left;
   background: radial-gradient(circle at 80% 20%, var(--card), var(--bg) 70%);
 }
-header img { width: 220px; filter: drop-shadow(0 16px 24px rgba(0,0,0,.15)); }
+header img { width: 220px; filter: drop-shadow(0 16px 24px rgba(0,0,0,.5)); }
 header h1 { font-family: "Bricolage Grotesque", "Noto Sans TC", sans-serif; font-size: clamp(2.2rem, 6vw, 3.6rem); line-height: 1.15; margin: 0 0 8px; font-weight: 900; }
 header p { margin: 0; color: var(--soft); font-size: 1.1rem; max-width: 26em; }
 header strong { color: var(--pop); }
 
 /* ---------- nav：黏在上面的選單 ---------- */
-nav { position: sticky; top: 0; z-index: 5; background: var(--ink); padding: 10px 16px; }
+nav { position: sticky; top: 0; z-index: 5; background: var(--nav); border-bottom: 1px solid var(--line); padding: 10px 16px; }
 nav ul { list-style: none; margin: 0 auto; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 10px; max-width: 980px; }
-nav a { color: var(--card); text-decoration: none; padding: 4px 14px; border-radius: 999px; font-weight: 500; display: inline-block; }
+nav a { color: var(--nav-ink); text-decoration: none; padding: 4px 14px; border-radius: 999px; font-weight: 500; display: inline-block; }
 nav a:hover { background: var(--main); color: #fff; }
 
 /* ---------- main + aside：兩欄 ---------- */
@@ -38,7 +44,7 @@ section, aside, article {
 section { scroll-margin-top: 70px; }
 h2 { margin: 0 0 12px; font-size: 1.45rem; display: flex; align-items: center; gap: 10px; }
 h2::after { content: ""; flex: 1; height: 2px; background: var(--line); }
-h3 { margin: 0 0 6px; color: var(--main); }
+h3 { margin: 0 0 6px; color: var(--pop); }
 p { margin: 8px 0; }
 ol, ul { padding-left: 1.4em; }
 li { margin: 6px 0; }
@@ -62,7 +68,7 @@ tr:nth-child(even) td { background: var(--bg); }
 form { display: grid; gap: 14px; }
 label { font-weight: 700; display: block; margin-bottom: 4px; }
 input[type="text"], input[type="email"], select, textarea {
-  width: 100%; font: inherit; padding: 10px 12px; border: 2px solid var(--line); border-radius: 10px; background: #fff; color: #222;
+  width: 100%; font: inherit; padding: 10px 12px; border: 2px solid var(--line); border-radius: 10px; background: var(--input); color: var(--ink);
 }
 input:focus, select:focus, textarea:focus { outline: none; border-color: var(--main); }
 fieldset { border: 2px dashed var(--line); border-radius: 12px; padding: 10px 14px; }
@@ -70,19 +76,19 @@ fieldset label { display: inline-flex; gap: 6px; align-items: center; font-weigh
 legend { font-weight: 700; padding: 0 6px; }
 button {
   font: inherit; font-weight: 700; padding: 12px 22px; border: 0; border-radius: 999px; cursor: pointer;
-  background: var(--pop); color: #fff; justify-self: start; box-shadow: 0 6px 0 rgba(0,0,0,.15);
+  background: var(--main); color: #fff; justify-self: start; box-shadow: 0 6px 0 rgba(0,0,0,.35);
 }
-button:active { transform: translateY(3px); box-shadow: 0 3px 0 rgba(0,0,0,.15); }
+button:active { transform: translateY(3px); box-shadow: 0 3px 0 rgba(0,0,0,.35); }
 
-/* 新增小功能樣式（隨機抽歌提示與留言清單） */
-.mini-pick-btn { padding: 8px 16px; font-size: 0.9rem; margin-top: 10px; background: var(--main); }
+/* 新增小功能樣式 */
+.mini-pick-btn { padding: 8px 16px; font-size: 0.9rem; margin-top: 12px; background: var(--main); }
 .mini-pick-result {
-  margin-top: 10px; padding: 10px 14px; background: var(--bg);
+  margin-top: 10px; padding: 10px 14px; background: var(--card);
   border-left: 4px solid var(--main); border-radius: 8px; font-size: 0.95rem;
 }
 .comment-item {
   background: var(--bg); border: 1px solid var(--line); border-radius: 12px;
-  padding: 12px 14px; margin-top: 10px; font-size: 0.94rem;
+  padding: 12px 14px; margin-top: 12px; font-size: 0.94rem;
 }
 
 /* ---------- footer ---------- */
